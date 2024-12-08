@@ -30,10 +30,12 @@ export default function CustomCarousel({ images }: CustomCarouselProps) {
       <div className="relative h-[400px] w-full shadow-md">
         <Image
           src={images[currentIndex].src}
-          fill
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 10vw"
           alt={images[currentIndex].alt}
           className="rounded-xl object-cover"
+          layout="responsive"
+          width={500}
+          height={300}
         />
         <button
           onClick={toggleFullScreen}
