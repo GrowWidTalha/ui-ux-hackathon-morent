@@ -1,74 +1,58 @@
-import Image from "next/image";
-import Link from "next/link";
+import Image from "next/image"
+import Link from "next/link"
+import { Input } from "@/components/ui/input"
 
-function Navabar({isAdmin}: {isAdmin?: boolean}) {
+export default function Navbar() {
   return (
-    <div className="bg-[#ffffff]  py-3">
-      <div className="flex items-start  md:items-center justify-between py-4 w-full  md:gap-4  max-w-[1440px]  px-5 mx-auto">
-        <div className="flex md:flex-row items-start w-full flex-col gap-12  md:items-center  justify-between md:max-w-[75%]  lg:max-w-[50%]  ">
-          <div className="flex justify-between w-full md:max-w-[150px] ">
-            {!isAdmin && (
-            <h1 className="text-[color:var(--primary-dark-500)] text-2xl font-[700] ">
-              <Link href={"/"}>MORENT</Link>
-            </h1>
-            )}
-            <Image
-              src={"/icons/menu.svg"}
-              alt="menu"
-              width={24}
-              height={24}
-              className="cursor-pointer block md:hidden"
-            />
-          </div>
-          <div className="flex border  w-full border-[color:var(--secondary-light-100)] px-6 py-3 gap-6 rounded-full items-center  ">
-            <label htmlFor="search" className="block min-w-[24px] ">
-              <Image
-                src={"/icons/search.svg"}
-                alt="search"
-                width={24}
-                height={24}
+    <div className="bg-white py-4">
+      <div className="max-w-[1440px] mx-auto px-5">
+        <div className="flex items-center justify-between">
+          {/* Logo */}
+          <Link href="/" className="text-blue-600 text-2xl font-bold">
+            MORENT
+          </Link>
+
+          {/* Search Bar */}
+          <div className="hidden md:flex items-center flex-1 max-w-md mx-8">
+            <div className="relative w-full">
+              <Input
+                type="search"
+                placeholder="Search something here"
+                className="w-full pl-10 pr-12 py-2 rounded-full border border-gray-200"
               />
-            </label>
-            <input
-              type="text"
-              name="search"
-              id="search"
-              className="border-none focus:outline-none w-full"
-              placeholder="Search something here."
-            />
+              <div className="absolute inset-y-0 left-3 flex items-center">
+                <Image
+                  src="/icons/search.svg"
+                  alt="Search"
+                  width={20}
+                  height={20}
+                  className="text-gray-400"
+                />
+              </div>
+              <div className="absolute inset-y-0 right-3 flex items-center">
+                <Image
+                  src="/icons/filter.svg"
+                  alt="Filter"
+                  width={20}
+                  height={20}
+                  className="text-gray-400"
+                />
+              </div>
+            </div>
+          </div>
+
+          {/* Profile */}
+          <div className="flex items-center">
             <Image
-              className="cursor-pointer"
-              src={"/icons/filter.svg"}
-              alt="filter"
-              width={24}
-              height={24}
+              src="/images/Profil.png"
+              alt="Profile"
+              width={40}
+              height={40}
+              className="rounded-full"
             />
           </div>
-        </div>
-        <div className="hidden md:flex items-center gap-4 ">
-          <Image
-            className="cursor-pointer"
-            src={"/icons/heart.svg"}
-            alt="heart"
-            width={24}
-            height={24}
-          />
-          <div className="relative cursor-pointer  min-w-[24px] ">
-            <Image src={"/icons/bell.svg"} alt="bell" width={24} height={24} />
-            <span className="absolute top-0 right-0 w-[8px] rounded-full h-[8px] bg-red-600"></span>
-          </div>
-          <Image
-            className="cursor-pointer"
-            src={"/icons/setting.svg"}
-            alt="setting"
-            width={24}
-            height={24}
-          />
-          <Image src={"/images/Profil.png"} alt="user" width={44} height={44} />
         </div>
       </div>
     </div>
-  );
+  )
 }
-
-export default Navabar;

@@ -20,7 +20,7 @@ const RentCar = () => {
         <div className="lg:sticky lg:top-24">
           <RentalSummary
             carName="Nissan GT-R"
-            carImage="/icons/look.png"
+            carImage="/images/1.png"
             rating={4}
             reviewCount={440}
             subtotal={80.0}
