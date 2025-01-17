@@ -18,10 +18,7 @@ const carsQuery = `*[_type == "car"]{
   image,
 }`;
 
-export async function GET(req: NextRequest) {
-  if (req.method !== "GET") {
-    return NextResponse.json({ error: "Method not allowed" }, { status: 405 });
-  }
+export async function GET() {
 
   try {
     const cars = await client.fetch(carsQuery);
