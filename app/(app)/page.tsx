@@ -3,20 +3,24 @@ import Hero from "@/components/sections/hero";
 import PickSection from "@/components/sections/pick-an-drop-picker";
 import { carsCollection } from "@/data/cars";
 
-export default function Home() {
+export default async function Home() {
+    const res = await fetch("http://localhost:3000/api/v1/cars")
+    if(!res) return "Loading..."
+    const data =await res.json()
+    console.log(data.data)
   return (
     <main className="">
       <Hero />
       <PickSection />
-      <CarSection
+      {/* <CarSection
         isHomePage
          title="Most Selling"
          cars={carsCollection.slice(0, 4)}
-      />
+      /> */}
       <CarSection
          title="Recomendation Car"
          showMoreButton
-         cars={carsCollection.slice(4, 12)}
+         cars={data.data}
       />
     </main>
   );
