@@ -8,10 +8,10 @@ const FavoriteButton = ({
   id,
 }: {
   isFavorite: boolean;
-  id: number;
+  id: string;
 }) => {
   const [favorite, setFavorite] = React.useState(isFavorite);
-  const handleFavorite = (id: number) => {
+  const handleFavorite = (id: string) => {
     const car = carById(id);
     if (car) {
       car.isFavorite = !car.isFavorite;

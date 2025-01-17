@@ -6,15 +6,15 @@ import { generateImage } from "@/lib/imageGenerator"
 
 const images = [
   {
-    src: "/images/1.jpg",
+    src: "/images/1.png",
     alt: "Car image 1",
   },
   {
-    src: "/images/2.jpg",
+    src: "/images/2.png",
     alt: "Car image 2",
   },
   {
-    src: "/images/3.jpg",
+    src: "/images/3.png",
     alt: "Car image 3",
   },
 ]

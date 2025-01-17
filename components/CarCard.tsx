@@ -2,41 +2,44 @@ import Image from "next/image";
 import React from "react";
 import FavoriteButton from "./FavoriteButton";
 import RentNowButton from "./RentNowButton";
+import { urlFor } from "@/sanity/lib/image"; // Ensure to define `urlFor` using Sanity's helper
+
 
 interface CarCardProps {
-  id: number;
-  carName: string;
+  id: string;
+  name: string | null;
   carType: string;
-  carImage: string;
-  carDetail: {
-    fuelCapacity: string;
-    personCapacity: string;
-    isAutomatic: boolean;
-  };
-  rentPrice: number;
-  crossPrice: number;
+  image: { asset: any, _type: string};
+  fuelCapacity: string | null;
+  seatingCapacity: string | null;
+  transmission: string | null;
+  pricePerDay: string | null;
   isFavorite: boolean;
 }
+
 function CarCard({
   id,
-  carName,
+  name,
   carType,
-  carImage,
-  carDetail,
-  rentPrice,
-  crossPrice,
+  image,
+  fuelCapacity,
+  seatingCapacity,
+  transmission,
+  pricePerDay,
   isFavorite,
 }: CarCardProps) {
-  const componentType = typeof window === "undefined" ? "server" : "client";
-  console.log(componentType);
+
+const carImageUrl = urlFor(image.asset._ref).url();
 
   return (
-    <div className="bg-[color:var(--white)] w-full  p-5 rounded-xl md:max-w-[320px]">
+    <div className="bg-[color:var(--white)] w-full p-5 rounded-xl md:max-w-[320px]">
       <div className="flex justify-between items-start pb-12">
         <div>
-          <h1 className="text-[20px] font-bold">{carName}</h1>
+          <h1 className="text-[20px] font-bold">
+            {name || "Unknown Model"}
+          </h1>
           <p className="text-[14px] text-[color:var(--secondary-dark-300)] font-bold">
-            {carType}
+            {carType || "N/A"}
           </p>
         </div>
         <FavoriteButton isFavorite={isFavorite} id={id} />
@@ -44,14 +47,14 @@ function CarCard({
       <div className="relative h-[120px]">
         <Image
           className="py-2 mx-auto object-contain"
-          src={carImage}
+          src={carImageUrl}
           fill
-          alt={"car"}
+          alt={name || "Car"}
         />
       </div>
       <div className="flex justify-between py-8 mt-2 gap-2">
         <div className="flex gap-1 items-center">
-          <svg
+        <svg
             width="24"
             height="24"
             viewBox="0 0 24 24"
@@ -64,11 +67,11 @@ function CarCard({
             />
           </svg>
           <p className="text-[10px] text-[color:var(--secondary-dark-300)]">
-            {carDetail.fuelCapacity}
+            {fuelCapacity || "Fuel capacity unknown"}
           </p>
         </div>
         <div className="flex gap-1 items-center">
-          <svg
+        <svg
             width="24"
             height="24"
             viewBox="0 0 24 24"
@@ -91,11 +94,11 @@ function CarCard({
           </svg>
 
           <p className="text-[10px] text-[color:var(--secondary-dark-300)]">
-            {carDetail.isAutomatic ? "Automatic" : "Manual"}
+            {transmission || "Transmission unknown"}
           </p>
         </div>
         <div className="flex gap-1 items-center">
-          <svg
+        <svg
             width="24"
             height="24"
             viewBox="0 0 24 24"
@@ -119,25 +122,16 @@ function CarCard({
               fill="#90A3BF"
             />
           </svg>
-
           <p className="text-[10px] text-[color:var(--secondary-dark-300)]">
-            {carDetail.personCapacity} persons
+            {seatingCapacity || "Capacity unknown"}
           </p>
         </div>
       </div>
       <div className="flex justify-between items-center gap-1 mt-2">
         <div>
           <p className="font-bold text-[20px] ">
-            ${rentPrice}/{" "}
-            <span className=" text-[color:var(--secondary-dark-300)] text-[14px] font-normal">
-              day
-            </span>
+            {pricePerDay || "Price not available"}
           </p>
-          {crossPrice && (
-            <p className="text-[14px] font-bold text-[color:var(--secondary-dark-300)] line-through">
-              ${crossPrice}
-            </p>
-          )}
         </div>
         <RentNowButton />
       </div>
