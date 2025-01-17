@@ -12,7 +12,7 @@ const CarInfo = () => {
         <h1 className="text-[28px] md:text-[32px] font-bold text-[color:var(--secondary-dark-500)]">
           Nissan GT - R
         </h1>
-        <FavoriteButton id={1} isFavorite={true} />
+        <FavoriteButton id={"1"} isFavorite={true} />
       </div>
       <CarReviewStar carNumberOfReviews={2} />
       <p className="text-[16px] md:text-[20px] font-normal text-[color:var(--secondary-dark-400)] py-8">
